@@ -8,6 +8,7 @@ on:
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    environment: SUPABASE
 
     steps:
       - name: Checkout code
