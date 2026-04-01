@@ -1,0 +1,28 @@
+name: FireAnt Daily Data
+
+on:
+  schedule:
+    - cron: "0 10 * * 1-5"   # 10:00 UTC = 17:00 ICT, thứ 2-6
+  workflow_dispatch:           # Cho phép chạy tay trên GitHub nếu cần
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run daily fetch
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python main_daily.py
