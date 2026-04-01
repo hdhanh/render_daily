@@ -4,7 +4,7 @@
 
 import time
 import random
-from datetime import datetime, timedelta
+from datetime import datetime
 from fetcher_fireant import fetch_fireant_all
 from transformer_fireant import transform_fireant
 from database import SupabaseClient
@@ -13,13 +13,9 @@ from database import SupabaseClient
 
 
 def get_date_range():
-    """
-    Lấy từ hôm qua đến hôm nay để đảm bảo không bỏ sót.
-    FireAnt upsert theo (symbol, date) nên không lo duplicate.
-    """
-    today = datetime.now().date()
-    yesterday = today - timedelta(days=1)
-    return str(yesterday), str(today)
+    """Chỉ lấy đúng ngày hôm nay."""
+    today = str(datetime.now().date())
+    return today, today
 
 
 def process_symbol(symbol, db, start_date, end_date):
