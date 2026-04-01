@@ -1,0 +1,12 @@
+services:
+  - type: cron
+    name: fireant-daily
+    runtime: python
+    schedule: "0 17 * * 1-5"   # 17:00 UTC = 00:00 ICT (sau khi phiên VN đóng cửa)
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main_daily.py
+    envVars:
+      - key: SUPABASE_URL
+        sync: false        # Điền tay trong Render dashboard, không commit lên git
+      - key: SUPABASE_KEY
+        sync: false
