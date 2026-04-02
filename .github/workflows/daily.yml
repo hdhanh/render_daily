@@ -1,9 +1,9 @@
-name: FireAnt Daily Data
+name: Fetch N Calculator Data Daily
 
 on:
   schedule:
-    - cron: "0 10 * * 1-5"   # 10:00 UTC = 17:00 ICT, thứ 2-6
-  workflow_dispatch:           # Cho phép chạy tay trên GitHub nếu cần
+    - cron: "0 10 * * 1-5"   # 10:00 UTC = 17:00 ICT, thứ 2–6
+  workflow_dispatch:           # Cho phép chạy tay trên GitHub
 
 jobs:
   fetch:
@@ -26,4 +26,4 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: python main_daily.py
+        run: python main.py
